@@ -1,12 +1,11 @@
-const {resolve} = require('path');
-const dotenv = require('dotenv');
-const { table } = require('console');
+import { resolve } from 'path';
+import dotenv from 'dotenv';
 
 dotenv.config({
-  path: resolve(__dirname, '..', '..', '.env'),
+  path: resolve(process.cwd(), '../../.env'),
 });
 
-module.exports = {
+export default {
   development: {
     client: process.env.DATABASE_CLIENT,
     connection: {
@@ -20,7 +19,7 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations',
-      directory: resolve(__dirname, 'migrations'),
+      directory: resolve(process.cwd(), 'migrations'),
     },
   },
   production: {
@@ -36,7 +35,7 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations',
-      directory: resolve(__dirname, 'migrations'),
+      directory: resolve(process.cwd(), 'migrations'),
     },
   },
 };
