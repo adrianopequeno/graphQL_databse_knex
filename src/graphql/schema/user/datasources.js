@@ -44,4 +44,8 @@ export class UsersApi extends RESTDataSource {
   batchLoadByPostId(id) {
     return this.dataLoader.load(id);
   }
+
+  batchLoadById(id) {
+    return this.dataLoader.load(id);
+  }
 }
