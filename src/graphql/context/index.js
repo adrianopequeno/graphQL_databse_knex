@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { UsersApi } from "./user/datasources.js";
+import { UsersApi } from "../schema/user/datasources.js";
 
 export const context = async ({ req, res }) => {
   let loggedUserId = await authorizeUserWithBearerToken(req);

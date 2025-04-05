@@ -1,10 +1,10 @@
 import { ApolloServer } from "apollo-server";
 
-import { typeDefs, resolvers } from "./graphql/schema.js";
-import { context } from "./graphql/context.js";
-import { PostsApi } from "./graphql/post/datasources.js";
-import { UsersApi } from "./graphql/user/datasources.js";
-import { LoginApi } from "./graphql/login/datasources.js";
+import { typeDefs, resolvers } from "./graphql/schema/index.js";
+import { context } from "./graphql/context/index.js";
+import { PostsApi } from "./graphql/schema/post/datasources.js";
+import { UsersApi } from "./graphql/schema/user/datasources.js";
+import { LoginApi } from "./graphql/schema/login/datasources.js";
 
 const server = new ApolloServer({
   typeDefs,
@@ -24,10 +24,10 @@ const server = new ApolloServer({
     },
   },
   uploads: false,
-  cors: {
-    origin: ["https://cdpn.io"], // * <- allow request from all domains, [https:domio.permitido.com]
-    credentials: true, // <- enable credentials (cookies)
-  },
+  // cors: {
+  //   origin: ["https://cdpn.io"], // * <- allow request from all domains, [https:domio.permitido.com]
+  //   credentials: true, // <- enable credentials (cookies)
+  // },
 });
 
 server.listen(4003).then(({ url }) => {
