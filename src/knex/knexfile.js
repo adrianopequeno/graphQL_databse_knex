@@ -1,8 +1,8 @@
-import { resolve } from 'path';
-import dotenv from 'dotenv';
+import { resolve } from "path";
+import dotenv from "dotenv";
 
 dotenv.config({
-  path: resolve(process.cwd(), '../../.env'),
+  path: resolve(process.cwd(), ".env"),
 });
 
 export default {
@@ -18,8 +18,8 @@ export default {
       max: 10,
     },
     migrations: {
-      tableName: 'knex_migrations',
-      directory: resolve(process.cwd(), 'migrations'),
+      tableName: "knex_migrations",
+      directory: resolve(process.cwd(), "migrations"),
     },
   },
   production: {
@@ -34,8 +34,8 @@ export default {
       max: 10,
     },
     migrations: {
-      tableName: 'knex_migrations',
-      directory: resolve(process.cwd(), 'migrations'),
+      tableName: "knex_migrations",
+      directory: resolve(process.cwd(), "migrations"),
     },
   },
 };
