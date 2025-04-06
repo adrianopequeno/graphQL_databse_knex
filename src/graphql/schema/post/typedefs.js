@@ -19,7 +19,6 @@ export const postTypeDefs = gql`
     createPost(data: CreatePostInput!): Post!
     updatePost(postId: ID!, data: UpdatePostInput!): Post!
     deletePost(postId: ID!): Boolean!
-    # deleteAllPosts: Boolean!
   }
 
   type Post {
@@ -29,17 +28,16 @@ export const postTypeDefs = gql`
     indexRef: Int!
     createdAt: String!
     user: User!
+    comments: [Comment!]!
   }
 
   input CreatePostInput {
     title: String!
     body: String!
-    # userId: String!
   }
 
   input UpdatePostInput {
     title: String
     body: String
-    # userId: String
   }
 `;

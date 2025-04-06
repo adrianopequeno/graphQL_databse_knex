@@ -43,6 +43,10 @@ const user = async ({ userId }, __, { dataSources }) => {
   return dataSources.usersApi.batchLoadByPostId(userId);
 };
 
+const comments = async ({ id: post_id }, __, { dataSources }) => {
+  return dataSources.commentDb.getByPostId(post_id);
+};
+
 export const postResolvers = {
   Query: {
     posts,
@@ -54,5 +58,5 @@ export const postResolvers = {
     deletePost,
     // deleteAllPosts,
   },
-  Post: { user },
+  Post: { user, comments },
 };

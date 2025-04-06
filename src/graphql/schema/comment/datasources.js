@@ -1,10 +1,24 @@
 import { ValidationError } from "apollo-server";
 import { SQLDataSource } from "../../datasources/sql/sql-datasource.js";
 
+const commentReducer = (comment) => ({
+  id: comment.id,
+  comment: comment.comment,
+  user_id: comment.user_id,
+  createdAt: new Date(comment.created_at).toISOString(),
+});
+
 export class CommentSQLDataSource extends SQLDataSource {
   async getById(id) {
     // return this.db("comments").where({ id }).first();
     return this.db("comments").where("id", "=", id);
+  }
+
+  async getByPostId(post_id) {
+    // this.db("comments").where({ post_id }).first();
+    const query = this.db("comments").where("post_id", "=", post_id);
+    const comments = await query;
+    return comments.map((comment) => commentReducer(comment));
   }
 
   async create({ userId, postId, comment }) {
