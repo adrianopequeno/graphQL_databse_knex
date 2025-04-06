@@ -44,7 +44,7 @@ const user = async ({ userId }, __, { dataSources }) => {
 };
 
 const comments = async ({ id: post_id }, __, { dataSources }) => {
-  return dataSources.commentDb.getByPostId(post_id);
+  return dataSources.commentDb.batchLoade(post_id);
 };
 
 export const postResolvers = {

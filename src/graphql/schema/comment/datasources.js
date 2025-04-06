@@ -45,4 +45,17 @@ export class CommentSQLDataSource extends SQLDataSource {
       ...partialComment,
     };
   }
+
+  async batchLoaderCallback(post_ids) {
+    const query = this.db("comments").whereIn("post_id", post_ids);
+    // console.log(query);
+    const comments = await query;
+    const filteredComments = post_ids.map((post_id) => {
+      return comments
+        .filter((comment) => String(comment.post_id) === String(post_id))
+        .map((comment) => commentReducer(comment));
+    });
+
+    return filteredComments;
+  }
 }
