@@ -1,10 +1,19 @@
-const createComment = async (_, { data }) => {
+import { checkIsLoggedIn } from "../login/utils/login-functions.js";
+const createComment = async (_, { data }, { dataSources, loggedUserId }) => {
+  checkIsLoggedIn(loggedUserId);
   const { postId, comment } = data;
-  console.log(postId, comment);
+
+  await dataSources.postsApi.getPosts(postId); // retornar um erro caso não encontre o post
+
+  return dataSources.commentDb.create({
+    userId: loggedUserId,
+    postId,
+    comment,
+  });
 };
 
 const user = async ({ user_id }, _, { dataSources }) => {
-  const user = await dataSources.usersDataSource.batchLoadById(user_id);
+  const user = await dataSources.usersApi.batchLoadById(user_id);
   return user;
 };
 

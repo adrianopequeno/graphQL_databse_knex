@@ -1,10 +1,13 @@
 import { ApolloServer } from "apollo-server";
 
+import { knex } from "./knex/index.js";
+
 import { typeDefs, resolvers } from "./graphql/schema/index.js";
 import { context } from "./graphql/context/index.js";
 import { PostsApi } from "./graphql/schema/post/datasources.js";
 import { UsersApi } from "./graphql/schema/user/datasources.js";
 import { LoginApi } from "./graphql/schema/login/datasources.js";
+import { CommentSQLDataSource } from "./graphql/schema/comment/datasources.js";
 
 const server = new ApolloServer({
   typeDefs,
@@ -15,6 +18,7 @@ const server = new ApolloServer({
       postsApi: new PostsApi(),
       usersApi: new UsersApi(),
       loginApi: new LoginApi(),
+      commentDb: new CommentSQLDataSource(knex),
     };
   },
   playground: {
